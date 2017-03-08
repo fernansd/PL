@@ -1,0 +1,3 @@
+Texto ejemplo:
+Codifica un programa flex que reciba un fichero de texto.
+Chars: 78 Palabras: 15 Lineas: 3

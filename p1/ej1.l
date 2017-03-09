@@ -36,7 +36,7 @@ void  main(int argc, char *argv[])
 				yyout=fopen(argv[2],"w");
 		default:
 			printf("\nNúmero de parámetros incorrecto\n");
-			printf("LLamar: %s <fichero-entrada>  [<fichero-salida>]");
+			printf("LLamar: %s <fichero-entrada>  [<fichero-salida>]\n", argv[0]);
 			exit(-1);
 	}
 	yylex();

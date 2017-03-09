@@ -50,7 +50,7 @@ void  main(int argc, char *argv[])
 				break;
 		default:
 			printf("\nNúmero de parámetros incorrecto\n");
-			printf("LLamar: %s <fichero-entrada>  [<fichero-salida>] [N1] [N2]");
+			printf("LLamar: %s <fichero-entrada>  [<fichero-salida>] [N1] [N2]\n", argv[0]);
 			exit(-1);
 	}
 	yylex();

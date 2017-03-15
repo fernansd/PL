@@ -12,20 +12,24 @@
 	int comprueba_fecha; // Si vale 0 no se busca por fecha
 %}
 
+/* Grupos de caracteres */
 letra       [a-zA-Z]
 digito      [0-9]
 blanco      [ \t]
-palabra     {letra}+
+
+/* Expresiones */
+usuario     ({digito}|{letra})+
 fecha       {digito}{1,2}[/-]{digito}{1,2}[/-]{digito}{1,2}
 hora        {digito}{1,2}:{digito}{1,2}
-registro    {palabra}{blanco}+{fecha}{blanco}+{hora}
+registro    {usuario}{blanco}+{fecha}{blanco}+{hora}
 
 %%
-{registro}  { // Si encuentra la palaabra la sustituye
+{registro}  {
 				char usuario[128];
 				char fecha[128];
-				sscanf(yytext, "%s %s %*", usuario, fecha);
+				sscanf(yytext, "%s %s %*s", usuario, fecha);
 
+				// Comprueba si el usuario actual coincide con el leído en consola
 				if (strcmp(usuario, usuario_objetivo) == 0) {
 					if (comprueba_fecha) {
 						if (strcmp(fecha, fecha_objetivo) == 0)
@@ -84,10 +88,11 @@ void  main(int argc, char *argv[])
 	}
 	yylex();
 	if (comprueba_fecha) {
-		printf("Accesos de usuario %s en fecha %s: %d\n", usuario_objetivo,
+		printf("Accesos de usuario <%s> en fecha <%s>: %d\n", usuario_objetivo,
 			fecha_objetivo, n_ocurrencias);
 	} else {
-		printf("Accesos de usuario %s: %d\n", usuario_objetivo,
+		printf("Accesos de usuario <%s>: %d\n", usuario_objetivo,
 			n_ocurrencias);
 	}
+	printf("\n");
 }
